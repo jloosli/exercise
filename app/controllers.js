@@ -69,7 +69,7 @@ angular.module('exercise.controllers', []).
                     $push:{exercises: toSave},
                     $inc:{points: toSave.points}
                 });
-                Restangular.all('employees').one($scope.user._id.$oid).customPUT(theData ,null, {apiKey: apiKey}).then(function (results) {
+                Restangular.all('employees').one($scope.user._id.$oid).customPUT(theData).then(function (results) {
                     $scope.user.exercises = results.exercises;
                     $scope.user.points = results.points;
                     resetForm();
