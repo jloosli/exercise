@@ -72,9 +72,16 @@ angular.module('exercise.controllers', []).
                 Restangular.all('employees').one($scope.user._id.$oid).customPUT(theData ,null, {apiKey: apiKey}).then(function (results) {
                     $scope.user.exercises = results.exercises;
                     $scope.user.points = results.points;
-                    $scope.exercise = {};
+                    resetForm();
                 });
             }
+            function resetForm() {
+                var today = new Date();
+                $scope.exercise = {
+                    date: today.toISOString().split("T")[0]
+                }
+            }
+            resetForm();
 
         }])
     .controller('menuCtrl', ['$scope', '$location', function ($scope, $location) {
