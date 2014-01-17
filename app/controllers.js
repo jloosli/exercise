@@ -78,7 +78,8 @@ angular.module('exercise.controllers', []).
             function resetForm() {
                 var today = new Date();
                 $scope.exercise = {
-                    date: today.toISOString().split("T")[0]
+                    date: today.toISOString().split("T")[0],
+                    points: 0
                 }
             }
             resetForm();
