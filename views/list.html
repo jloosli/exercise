@@ -1,0 +1,11 @@
+<h2>Employees:</h2>
+<input type="search" ng-model="search"/>
+<div class="row">
+	<div class="col-xs-8"><strong>Name</strong></div>
+	<div class="col-xs-4"><strong>Score</strong></div>
+</div>
+<account-holders ng-repeat="account in accountHolders.$object | filter:search" account="account"></account-holders>
+<button type="button" ng-class="['btn', {'btn-primary':showRawData}]" ng-click="showRawData=!showRawData">Toggle Raw Data</button>
+<pre ng-show="showRawData">
+	{{raw}}
+</pre>

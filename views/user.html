@@ -1,0 +1,114 @@
+<h2>{{user.name}}
+	<div class="btn-group">
+		<button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+			Switch User <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li ng-repeat="accountHolder in accountHolders.$object "><a ng-href="#/users/{{accountHolder._id.$oid}}">{{accountHolder.name}}</a>
+			</li>
+		</ul>
+	</div>
+</h2>
+<form class="form-horizontal clearfix" role="form" name="addTransaction" ng-submit="submitExercise()"
+      ng-model="theActivityForm">
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="activity">Activity</label>
+
+		<div class="col-sm-10 col-lg-5">
+			<input type="text" class="form-control" required
+			       id="activity" placeholder="e.g. Running, Weight Lifting, etc."
+			       ng-model="exercise.activity">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="date">Date</label>
+
+		<div class="col-sm-10 col-lg-5"><input class="form-control" id="date" type="date" ng-model="exercise.date" required /></div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Activity Type</label>
+
+		<div class="col-sm-10">
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" id="type_cardio" ng-model="exercise.type" value="cardio"
+							ng-change=""/>
+					Cardio
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" id="type_weights" ng-model="exercise.type" value="weights"/>
+					Weights
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" ng-show="exercise.type == 'cardio'">
+		<label for="duration" class="col-sm-2 control-label">Duration</label>
+
+		<div class=" col-sm-10 col-lg-5">
+			<div class="input-group">
+
+				<input type="number" class="form-control" id="duration" name="duration" step="1"
+				       ng-required="exercise.type == 'cardio'"
+				       placeholder="e.g. 30" ng-model="exercise.duration">
+				<span class="input-group-addon">minutes</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" ng-show="exercise.type == 'weights'">
+		<label for="weight" class="col-sm-2 control-label">Weight</label>
+
+		<div class=" col-sm-10 col-lg-5">
+			<div class="input-group">
+
+				<input type="number" class="form-control" id="weight" name="weight" step="1"
+				       ng-required="exercise.type == 'weights'"
+				       placeholder="e.g. 300" ng-model="exercise.weight">
+				<span class="input-group-addon">lbs.</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" ng-show="exercise.type == 'weights'">
+		<label for="reps" class="col-sm-2 control-label">Reps</label>
+
+		<div class="col-sm-10 col-lg-5">
+				<input type="number" class="form-control" id="reps" name="reps" step="1"
+				       ng-required="exercise.type == 'weights'"
+				       placeholder="e.g. 30" ng-model="exercise.reps">
+		</div>
+	</div>
+	<div class="form-group"><label class="col-sm-2 control-label" >Points</label>
+
+		<div class="col-sm-10 col-lg-5">
+			<p class="form-control-static">{{exercise.points}}</p>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary btn-lg col-xs-12 col-lg-8">Submit</button>
+</form>
+<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}
+</alert>
+<div><a href="#/users">Back to the Employee List</a></div>
+
+<div>
+	<div class="row">
+		<h3 class="col-xs-12">Exercises
+			<small>(Current Points: {{user.points || 0}})</small>
+		</h3>
+	</div>
+	<input ng-model="exerciseSearch" placeholder="Exercise Search" type="search"/>
+	<div class="row">
+		<h4 class="col-xs-8">Click on a line to see the exercise details</h4>
+	</div>
+
+	<div class="row">
+		<h4 class="col-xs-2">Date</h4>
+		<h4 class="col-xs-6">Activity</h4>
+		<h4 class="col-xs-2">Type</h4>
+		<h4 class="col-xs-2">Points</h4>
+	</div>
+	<div ng-repeat="exercise in user.exercises | filter:exerciseSearch | orderBy:'date':'reverse'">
+		<exercise-list exercise="exercise" ></exercise-list>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<form name="loginForm" role="form" ng-submit="doLogin(login)">
+	<div class="alert alert-danger" ng-show="error">{{error}}</div>
+	<div class="form-group"
+	     ng-class="{'has-error': problem.user}">
+		<label for="login">Login</label>
+		<input autofill-hack type="text" class="form-control" name="user" id="login" placeholder="Enter email or username" ng-model="login.nameOrEmail">
+	</div>
+	<div class="form-group"
+	     ng-class="{'has-error': problem.pass}">
+		<label for="password">Password</label>
+		<input autofill-hack type="password" class="form-control" name="pass" id="password" placeholder="Password" ng-model="login.password">
+	</div>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" ng-model="login.remember"> Remember Me
+		</label>
+	</div>
+	<button type="submit" class="btn btn-primary pull-right">Login</button>
+</form>
+<pre>Form = {{login | json}}</pre>
+<pre>Form = {{userProblem | json}}</pre>
+<pre>Form = {{loginForm.name.$pristine}}</pre>
+<pre>Form = {{loginForm.username.$pristine}}</pre>
+<pre>Form = {{error}}</pre>

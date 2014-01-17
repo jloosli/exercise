@@ -1,0 +1,21 @@
+
+<div>
+	<div class="row" ng-click="showDetails=!showDetails">
+		<div class="col-xs-2" ng-bind="getJsDate(exercise.date)  | date "></div>
+		<div class="col-xs-6">{{exercise.activity}}</div>
+		<div class="col-xs-2">{{exercise.type}}</div>
+		<div class="col-xs-2">{{exercise.points || 0}}</div>
+	</div>
+	<div class="row" ng-hide="!showDetails">
+		<dl class="dl-horizontal col-xs-8 co-xs-4-push" ng-show="exercise.type == 'cardio'">
+			<dt>Duration:</dt>
+			<dl>{{exercise.duration}} minutes</dl>
+		</dl>
+		<dl class="dl-horizontal col-xs-8 co-xs-4-push" ng-show="exercise.type == 'weights'">
+			<dt>Weight:</dt>
+			<dl>{{exercise.weight}} lbs.</dl>
+			<dt>Reps</dt>
+			<dl>{{exercise.reps}}</dl>
+		</dl>
+	</div>
+</div>

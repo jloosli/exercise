@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="col-xs-3">
+		<label for="{{'env_' + envelope.id}}">
+			<span class="glyphicon glyphicon-fire" ng-hide="envelope.default_spend != 1" title="Default spending envelope"></span>
+			{{envelope.name}} {{envelope.balance | currency}}
+			<small>({{envelope.percent}}%)</small>
+		</label>
+	</div>
+	<div class="input-group col-xs-9 col-lg-5">
+		<span class="input-group-addon">$</span>
+		<input type="number" class="form-control" id="{{'env_' + envelope.id}}" step="any"
+		       name="{{'env_' + envelope.id}}" placeholder="{{envelope.name}}" ng-model="envelope.val"/>
+		<span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="forceEnvCalc()">Calc!
+		</button></span>
+	</div>
+</div>
